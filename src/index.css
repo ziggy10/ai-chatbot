@@ -1,0 +1,549 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Source Sans 3', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Rainbow button variables */
+  --color-1: #0bb2cd;
+  --color-2: #00c6c8;
+  --color-3: #37d8b7;
+  --color-4: #79e89e;
+  --color-5: #b8f284;
+
+  /* Gradient shadow for message input - very reduced opacity for light mode */
+  --gradient-shadow-light: linear-gradient(
+    45deg,
+    rgba(11, 178, 205, 0.01),
+    rgba(55, 216, 183, 0.02),
+    transparent,
+    rgba(184, 242, 132, 0.03),
+    rgba(0, 198, 200, 0.01),
+    transparent,
+    rgba(184, 242, 132, 0.04),
+    rgba(249, 248, 113, 0.02)
+  );
+
+  /* Dark mode gradient - normal opacity */
+  --gradient-shadow-dark: linear-gradient(
+    45deg,
+    rgba(11, 178, 205, 0.05),
+    rgba(55, 216, 183, 0.15),
+    transparent,
+    rgba(184, 242, 132, 0.25),
+    rgba(0, 198, 200, 0.1),
+    transparent,
+    rgba(184, 242, 132, 0.3),
+    rgba(249, 248, 113, 0.2)
+  );
+}
+
+code {
+  font-family: 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 189 100% 42%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 189 100% 42%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --color-1: oklch(66.2% 0.225 25.9);
+    --color-2: oklch(60.4% 0.26 302);
+    --color-3: oklch(69.6% 0.165 251);
+    --color-4: oklch(80.2% 0.134 225);
+    --color-5: oklch(90.7% 0.231 133);
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 189 100% 42%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 189 100% 42%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --color-1: oklch(66.2% 0.225 25.9);
+    --color-2: oklch(60.4% 0.26 302);
+    --color-3: oklch(69.6% 0.165 251);
+    --color-4: oklch(80.2% 0.134 225);
+    --color-5: oklch(90.7% 0.231 133);
+  }
+  .theme {
+    --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Brand Mesh Gradient with Animation */
+  .brand-mesh-gradient {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(at 7% 41%, rgba(10, 178, 204, 0.8) 0px, transparent 50%), 
+                radial-gradient(at 18% 9%, rgba(0, 196, 199, 0.8) 0px, transparent 50%), 
+                radial-gradient(at 83.5% 76.5%, rgba(54, 217, 184, 0.8) 0px, transparent 50%), 
+                radial-gradient(at 47% 59%, rgba(121, 232, 158, 0.8) 0px, transparent 50%), 
+                radial-gradient(at 87.8% 29%, rgba(184, 242, 133, 0.8) 0px, transparent 50%), 
+                radial-gradient(at 17.7% 86.2%, rgba(50, 160, 141, 0.8) 0px, transparent 50%);
+    background-size: 200% 200%;
+    animation: mesh-flow 7s ease-in-out infinite;
+  }
+
+  .brand-mesh-gradient:hover {
+    animation: mesh-flow-hover 2.5s ease-in-out infinite;
+  }
+
+  @keyframes mesh-flow {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes mesh-flow-hover {
+    0%, 100% {
+      background-position: 0% 50%;
+      background-size: 200% 200%;
+    }
+    50% {
+      background-position: 100% 50%;
+      background-size: 250% 250%;
+    }
+  }
+
+  /* Rainbow button animation */
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-rainbow {
+    animation: rainbow 3s ease-in-out infinite;
+  }
+
+  /* Card effect with proper transparency */
+  .card {
+    backdrop-filter: blur(16px) saturate(84%);
+    -webkit-backdrop-filter: blur(16px) saturate(84%);
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+
+  .dark .card {
+    background-color: rgba(17, 59, 57, 0.35);
+  }
+
+  /* Glass effect for tooltips and suggested prompts */
+  .glass {
+    backdrop-filter: blur(16px) saturate(84%);
+    -webkit-backdrop-filter: blur(16px) saturate(84%);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    color: inherit;
+  }
+
+  .dark .glass {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Glow effect for buttons */
+  .glow-effect {
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .glow-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(10, 178, 204, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    opacity: 0;
+  }
+
+  .glow-effect:hover::before {
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  /* Enhanced focus state for message input with reduced glow spread */
+  .message-input-focused {
+    box-shadow: 
+      0 0 0 2px rgba(59, 130, 246, 0.3),
+      0 2px 8px rgba(59, 130, 246, 0.08),
+      0 1px 4px rgba(59, 130, 246, 0.05);
+    transition: all 1500ms ease-out;
+    position: relative;
+    overflow: visible;
+  }
+
+  .message-input-focused::before {
+    content: '';
+    position: absolute;
+    inset: -150px;
+    background: radial-gradient(
+      circle at center,
+      rgba(59, 130, 246, 0.06) 0%,
+      rgba(59, 130, 246, 0.03) 30%,
+      rgba(59, 130, 246, 0.01) 60%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    animation: particleGlow 1500ms ease-out forwards;
+  }
+
+  .dark .message-input-focused {
+    box-shadow: 
+      0 0 0 2px rgba(59, 130, 246, 0.4),
+      0 2px 8px rgba(59, 130, 246, 0.12),
+      0 1px 4px rgba(59, 130, 246, 0.08);
+    transition: all 1500ms ease-out;
+  }
+
+  .dark .message-input-focused::before {
+    background: radial-gradient(
+      circle at center,
+      rgba(59, 130, 246, 0.08) 0%,
+      rgba(59, 130, 246, 0.04) 30%,
+      rgba(59, 130, 246, 0.01) 60%,
+      transparent 100%
+    );
+  }
+
+  @keyframes particleGlow {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Particle animation transitions */
+  .particles-transition {
+    transition: all 1500ms ease-out;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(90deg, #0bb2cd, #37d8b7, transparent, #b8f284, #00c6c8, transparent, #b8f284, #f9f871);
+    border-radius: 0.5rem;
+    padding: 1px;
+  }
+
+  .gradient-border > div {
+    background: hsl(var(--background));
+    border-radius: calc(0.5rem - 1px);
+  }
+
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(11, 178, 205, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .ripple:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Icon text shadow for visibility */
+  .icon-shadow {
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+  }
+
+  /* Model button animations */
+  .model-button-enter {
+    animation: modelButtonEnter 0.3s ease-out forwards;
+  }
+
+  .model-button-exit {
+    animation: modelButtonExit 0.3s ease-out forwards;
+  }
+
+  @keyframes modelButtonEnter {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes modelButtonExit {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+  }
+
+  /* Footer link styles */
+  .footer-link {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .light .footer-link {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .light .footer-link:hover {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Enhanced recorder state animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOutDown {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .recorder-enter {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .recorder-exit {
+    animation: fadeOutDown 0.5s ease-out forwards;
+  }
+
+  .recorder-controls-enter {
+    animation: slideInFromRight 0.5s ease-out forwards;
+  }
+
+  /* Waveform bar animations */
+  @keyframes waveformPulse {
+    0%, 100% {
+      transform: scaleY(0.3);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  .waveform-bar {
+    animation: waveformPulse 1.5s ease-in-out infinite;
+  }
+
+  /* Processing overlay animation */
+  @keyframes processingPulse {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .processing-overlay {
+    animation: processingPulse 2s ease-in-out infinite;
+  }
+
+  /* Radial gradient utility */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+}
+
+/* Stars background animation */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  animation: twinkle 2s infinite;
+}
+
+.dark .star {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.star {
+  background: rgba(128, 128, 128, 0.4);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@theme inline {
+  @keyframes rainbow {
+  0% {
+    background-position: 0%;
+    }
+  100% {
+    background-position: 200%;
+    }
+  }
+}
